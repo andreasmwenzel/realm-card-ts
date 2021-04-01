@@ -1,15 +1,12 @@
-import React from 'react';
+import React from "react";
 
 // import './App.css';
-import 'semantic-ui-css/semantic.min.css'
+import "semantic-ui-css/semantic.min.css";
 
 import LandingPage from "./components/LandingPage";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import UserProvider from './realm/UserContext';
+import LoginPage from "./components/LoginPage";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { UserProvider } from "./realm/UserContext";
 
 function App() {
   return (
@@ -17,6 +14,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage}></Route>
+          <Route path="/signup/">
+            <LoginPage initialMode="signup" />
+          </Route>
+          <Route path="/login">
+            <LoginPage initialMode="login" />
+          </Route>
         </Switch>
       </Router>
     </UserProvider>
