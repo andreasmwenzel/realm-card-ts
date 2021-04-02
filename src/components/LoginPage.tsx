@@ -22,7 +22,7 @@ type LoginProps = {
 const LoginPage = ({ initialMode }: LoginProps) => {
   return (
     <Segment>
-      <Navbar />
+      <Navbar loginButtons={false} />
       <LoginBody initialMode={initialMode} />
     </Segment>
   );
@@ -36,6 +36,10 @@ type ValidationError = {
 const LoginBody = ({ initialMode }: LoginProps) => {
   const { user, setUser } = useUserContext()!;
   let history = useHistory();
+
+  if (user) {
+    history.push("/");
+  }
 
   const [mode, setMode] = React.useState(initialMode); //states "login" or "register"
   console.log(`Mode: ${mode}`);
@@ -98,6 +102,7 @@ const LoginBody = ({ initialMode }: LoginProps) => {
       const creds = Credentials.emailPassword(email, password);
       const user = await app.logIn(creds);
       setUser(user);
+      history.push("/games/");
     } catch (err) {
       return handleAuthenticationError(err);
     }

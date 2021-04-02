@@ -4,7 +4,14 @@ import { useHistory } from "react-router-dom";
 import { useUserContext } from "../realm/UserContext";
 import { app } from "../realm/RealmApp";
 
-const Navbar: React.FC = () => {
+type NavbarProps = {
+  loginButtons?: boolean;
+};
+
+const Navbar: React.FC<NavbarProps> = ({
+  loginButtons = true,
+}: NavbarProps) => {
+  console.log(`loginButtons: ${loginButtons}`);
   const { user, setUser } = useUserContext()!;
   let history = useHistory();
   async function handleLogOut() {
@@ -20,6 +27,7 @@ const Navbar: React.FC = () => {
         <Menu.Item as="a" onClick={() => history.push("/about")}>
           About
         </Menu.Item>
+
         {user ? (
           <Menu.Item poition="right">
             <Button
@@ -39,13 +47,13 @@ const Navbar: React.FC = () => {
               Log Out
             </Button>
           </Menu.Item>
-        ) : (
+        ) : loginButtons ? (
           <Menu.Item position="right">
             <Button as="a" onClick={() => history.push("/login")}>
               Log in
             </Button>
           </Menu.Item>
-        )}
+        ) : null}
       </Container>
     </Menu>
   );

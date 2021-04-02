@@ -5,6 +5,7 @@ import "semantic-ui-css/semantic.min.css";
 
 import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/LoginPage";
+import AboutPage from "./components/AboutPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { UserProvider } from "./realm/UserContext";
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login">
             <LoginPage initialMode="login" />
           </Route>
+          <Route path="/about/" component={AboutPage}></Route>
         </Switch>
       </Router>
     </UserProvider>
